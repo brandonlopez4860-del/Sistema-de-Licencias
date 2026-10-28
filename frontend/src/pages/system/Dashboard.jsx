@@ -14,7 +14,8 @@ const SUSTENTO_COLORS = {
 export default function Dashboard() {
   const [selectedPeriod, setSelectedPeriod] = useState('Anual');
   const [selectedMonth, setSelectedMonth] = useState('Todos');
-  // Estados de dropdown eliminados - ahora son estáticos
+  const [isPeriodOpen, setIsPeriodOpen] = useState(false);
+  const [isMonthOpen, setIsMonthOpen] = useState(false);
 
   const [dataLine, setDataLine] = useState([]);
   const [dataPago, setDataPago] = useState([]);

@@ -18,7 +18,19 @@ export const AuthProvider = ({ children }) => {
     // Verificar si hay usuario guardado
     const savedUser = localStorage.getItem('user');
     if (savedUser) {
-      setUser(JSON.parse(savedUser));
+      try {
+        const parsedUser = JSON.parse(savedUser);
+        if (!parsedUser || typeof parsedUser !== 'object' || Array.isArray(parsedUser)) {
+          throw new Error('El usuario guardado no tiene un formato válido.');
+        }
+        setUser(parsedUser);
+      } catch (error) {
+        console.error('No se pudo restaurar la sesión guardada:', error);
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        delete axios.defaults.headers.common['Authorization'];
+        setIsAuthenticated(false);
+      }
     }
   }, []);
 
