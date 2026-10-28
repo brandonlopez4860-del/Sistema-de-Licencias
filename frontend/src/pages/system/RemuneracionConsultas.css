@@ -1,0 +1,475 @@
+/* ================= CONTENEDOR PRINCIPAL ================= */
+.data-table-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  
+  /* EL TRUCO DEFINITIVO */
+  /* 100vw es el 100% de tu pantalla. Le restamos 280px que es aprox. lo que mide tu menú lateral + márgenes */
+  width: 100%;
+  max-width: calc(100vw - 280px); 
+  
+  /* Permite que el popover sobresalga hacia abajo sin cortarse */
+  overflow: visible; 
+}
+
+/* ================= HEADER Y BOTÓN DE IMPRESIÓN ================= */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main, #ffffff);
+  margin: 0;
+}
+
+.btn-print {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #5c59e8;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-print:hover {
+  background-color: #4a47b8;
+}
+
+.btn-print:active {
+  transform: scale(0.98);
+}
+
+.btn-print .panel-icon {
+  width: 18px;
+  height: 18px;
+  color: white;
+}
+
+.btn-excel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #107c41;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-excel:hover {
+  background-color: #185c37;
+}
+
+.btn-excel:active {
+  transform: scale(0.98);
+}
+
+.btn-excel .panel-icon {
+  width: 18px;
+  height: 18px;
+  color: white;
+}
+
+/* ================= TARJETA DE LA TABLA ================= */
+.data-table-card {
+  background-color: var(--card-bg, #18181b); 
+  border: 1px solid var(--border-light, #27272a);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  
+  /* Aseguramos que la tarjeta respete el tamaño que impusimos arriba */
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden; 
+}
+
+/* ================= FILTROS AVANZADOS (ADAPTACIÓN DE IMAGEN) ================= */
+.advanced-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-light, #27272a);
+  background-color: var(--card-bg, #18181b);
+}
+
+.filter-group {
+  flex: 1;
+  min-width: 250px;
+  background-color: var(--bg-hover, #27272a);
+  border: 1px solid var(--border-light, #3f3f46);
+  border-radius: 8px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.filter-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-main, #e4e4e7);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.filter-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-controls label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted, #a1a1aa);
+}
+
+.filter-controls input {
+  background-color: var(--card-bg, #18181b);
+  border: 1px solid var(--border-light, #3f3f46);
+  border-radius: 6px;
+  padding: 6px 10px;
+  color: var(--text-main, #fff);
+  font-size: 0.85rem;
+  outline: none;
+  flex: 1;
+}
+
+.filter-controls input:focus {
+  border-color: var(--primary-purple, #5c59e8);
+}
+
+/* El icono del calendario adapta su color con currentColor o invert() dependiendo del tema */
+.filter-controls input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  /* El CSS principal del proyecto debería definir --icon-filter para temas */
+  filter: var(--icon-invert, invert(1)); 
+}
+
+.input-short {
+  max-width: 60px;
+  text-align: center;
+}
+
+.btn-filter {
+  background-color: var(--border-light, #3f3f46);
+  color: var(--text-main, #e4e4e7);
+  border: 1px solid var(--border-light, #52525b);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-filter:hover {
+  background-color: var(--primary-hover, #52525b);
+  color: #fff;
+}
+
+.btn-filter:active {
+  transform: scale(0.95);
+}
+
+/* ================= CONTENEDOR DE LA TABLA (Activa el Scroll) ================= */
+.table-responsive {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  padding-bottom: 8px; 
+  display: block;
+  
+  /* Firefox */
+  scrollbar-width: auto;
+  scrollbar-color: var(--text-muted, #71717a) var(--border-light, #27272a);
+}
+
+/* Chrome, Edge, Safari */
+.table-responsive::-webkit-scrollbar {
+  height: 12px;
+}
+.table-responsive::-webkit-scrollbar-track {
+  background-color: var(--border-light, #27272a);
+  border-radius: 8px;
+  margin: 0 16px;
+}
+.table-responsive::-webkit-scrollbar-thumb {
+  background-color: var(--primary-hover, #52525b);
+  border-radius: 8px;
+  border: 2px solid var(--border-light, #27272a);
+}
+.table-responsive::-webkit-scrollbar-thumb:hover {
+  background-color: var(--text-muted, #a1a1aa);
+}
+
+/* ================= ESTILOS INTERNOS DE LA TABLA ================= */
+.custom-data-table {
+  width: 100%;
+  min-width: 1500px; 
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.custom-data-table th, 
+.custom-data-table td {
+  padding: 16px 20px; 
+  white-space: nowrap;
+}
+
+.custom-data-table th {
+  color: var(--text-main, #e4e4e7);
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-bottom: none;
+  padding-bottom: 8px;
+}
+
+.sort-icon {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 4px;
+  color: var(--text-muted, #71717a);
+}
+
+/* Fila de Filtros */
+.filter-row th td {
+  padding-top: 0;
+  padding-bottom: 16px;
+}
+
+.filter-row input {
+  width: 100%;
+  background-color: var(--bg-hover, #27272a);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 8px;
+  color: var(--text-main, #fff);
+  outline: none;
+  font-size: 0.85rem;
+}
+
+.filter-row input:focus {
+  border-color: var(--primary-purple, #5c59e8);
+}
+
+.custom-data-table td {
+  color: var(--text-muted, #e4e4e7);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--border-light, #27272a);
+}
+
+.font-semibold { font-weight: 600; color: var(--text-main, #fff); }
+.text-muted { color: var(--text-muted, #a1a1aa); }
+
+/* ================= PAGINACIÓN ================= */
+.table-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background-color: var(--card-bg, #18181b);
+  border-top: 1px solid var(--border-light, #27272a);
+}
+
+.pagination {
+  display: flex;
+  gap: 8px;
+}
+
+.page-btn {
+  background-color: var(--border-light, #27272a);
+  color: var(--text-muted, #a1a1aa);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.page-btn .panel-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.page-btn:hover { background-color: var(--primary-hover, #3f3f46); color: var(--text-main, #fff); }
+
+.page-btn.active {
+  background-color: var(--primary-hover, #3f3f46);
+  color: var(--text-main, #fff);
+}
+
+.showing-info {
+  color: var(--text-muted, #a1a1aa);
+  font-size: 0.9rem;
+}
+
+/* ================= BOTÓN Y POPOVER DE FILTROS ================= */
+.filter-wrapper { position: relative; }
+.btn-secondary { display: flex; align-items: center; gap: 8px; background-color: transparent; color: var(--text-main, #e4e4e7); border: 1px solid var(--border-light, #3f3f46); padding: 10px 16px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.btn-secondary:hover { background-color: var(--bg-hover, #27272a); border-color: var(--border-light, #52525b); }
+.btn-secondary .panel-icon { width: 18px; height: 18px; }
+.filter-popover { position: absolute; top: calc(100% + 8px); right: 0; width: 300px; background-color: var(--card-bg, #18181b); border: 1px solid var(--border-light, #3f3f46); border-radius: 12px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); z-index: 100; display: flex; flex-direction: column; }
+.popover-header { display: flex; justify-content: space-between; align-items: center; padding: 16px; border-bottom: 1px solid var(--border-light, #27272a); }
+.popover-header h3 { margin: 0; font-size: 1.1rem; font-weight: 600; color: var(--text-main, #fff); }
+.btn-close { background: none; border: none; color: var(--text-muted, #a1a1aa); font-size: 1.2rem; cursor: pointer; }
+.btn-close:hover { color: var(--text-main, #fff); }
+.popover-body { padding: 16px; display: flex; flex-direction: column; gap: 20px; }
+.filter-section h4 { margin: 0 0 10px 0; font-size: 0.8rem; font-weight: 700; color: var(--text-main, #fff); text-transform: uppercase; letter-spacing: 0.5px; }
+.filter-row { display: flex; align-items: center; gap: 8px; }
+.filter-row label { font-size: 0.8rem; color: var(--text-main, #e4e4e7); font-weight: 600; }
+.filter-row input { background-color: var(--bg-hover, #27272a); border: 1px solid var(--text-muted, #52525b); border-radius: 6px; padding: 8px 10px; color: var(--text-main, #fff); font-size: 0.85rem; outline: none; flex: 1; }
+.filter-row input:focus { border-color: var(--primary-purple, #5c59e8); }
+.filter-row input[type="date"]::-webkit-calendar-picker-indicator { filter: var(--icon-invert, invert(1)); cursor: pointer; }
+.input-mini { max-width: 60px; text-align: center; }
+.btn-action { background-color: var(--bg-hover, #3f3f46); color: var(--text-main, #e4e4e7); border: 1px solid var(--text-muted, #52525b); border-radius: 6px; padding: 8px 12px; font-size: 0.8rem; font-weight: 600; cursor: pointer; }
+.btn-action:hover { background-color: var(--primary-hover, #52525b); color: #fff; }
+.popover-footer { display: flex; justify-content: space-between; padding: 16px; border-top: 1px solid var(--border-light, #27272a); background-color: var(--bg-hover, #27272a); border-radius: 0 0 12px 12px; }
+.btn-reset { background-color: transparent; color: var(--text-main, #e4e4e7); border: 1px solid var(--border-light, #52525b); padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; }
+.btn-reset:hover { background-color: var(--border-light, #3f3f46); }
+.btn-primary { background-color: var(--primary-purple, #5c59e8); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; }
+.btn-primary:hover { background-color: var(--primary-hover, #4a47b8); }
+
+/* ================= CUSTOM REACT-DATEPICKER THEME ================= */
+.custom-datepicker-wrapper {
+  width: 100%;
+  flex: 1;
+}
+
+.custom-datepicker-wrapper .react-datepicker__input-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.custom-datepicker-input {
+  background-color: #232325; /* Fondo oscuro liso */
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 10px 10px 10px 40px !important; /* Aumentamos el padding izquierdo */
+  color: var(--text-main, #fff);
+  font-size: 0.9rem;
+  outline: none;
+  width: 100%;
+  transition: border-color 0.2s;
+}
+
+.custom-datepicker-input::placeholder {
+  color: #6b7280; /* Color gris para el placeholder dd/mm/aaaa */
+}
+
+.custom-datepicker-input:focus {
+  border-color: #3f3f46; /* Borde sutil al enfocar */
+}
+
+/* Icono dentro del input */
+.react-datepicker__input-container .react-datepicker__calendar-icon {
+  position: absolute !important;
+  left: 10px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  fill: #9ca3af !important;
+  color: #9ca3af !important;
+  width: 18px !important;
+  height: 18px !important;
+  padding: 0 !important;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Asegurar que el SVG en sí herede el color correctamente */
+.react-datepicker__input-container .react-datepicker__calendar-icon svg {
+  fill: #9ca3af !important;
+  width: 100%;
+  height: 100%;
+}
+
+/* Theme overrides para react-datepicker en modo oscuro */
+.react-datepicker {
+  background-color: var(--card-bg, #18181b) !important;
+  border: 1px solid var(--border-light, #3f3f46) !important;
+  font-family: inherit !important;
+  color: #fff !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.react-datepicker__header {
+  background-color: var(--bg-hover, #27272a) !important;
+  border-bottom: 1px solid var(--border-light, #3f3f46) !important;
+}
+
+.react-datepicker__current-month, 
+.react-datepicker-time__header, 
+.react-datepicker-year-header {
+  color: #fff !important;
+}
+
+.react-datepicker__day-name, 
+.react-datepicker__day, 
+.react-datepicker__time-name {
+  color: #e4e4e7 !important;
+}
+
+.react-datepicker__day:hover {
+  background-color: var(--border-light, #3f3f46) !important;
+}
+
+.react-datepicker__day--selected, 
+.react-datepicker__day--in-selecting-range, 
+.react-datepicker__day--in-range, 
+.react-datepicker__month-text--selected, 
+.react-datepicker__month-text--in-selecting-range, 
+.react-datepicker__month-text--in-range {
+  background-color: var(--primary-purple, #5c59e8) !important;
+  color: #fff !important;
+}
+
+.react-datepicker__day--keyboard-selected {
+  background-color: var(--primary-hover, #4a47b8) !important;
+}
+
+.react-datepicker__close-icon::after {
+  background-color: transparent !important;
+  color: var(--text-muted, #a1a1aa) !important;
+  font-size: 1.2rem;
+}
+
+/* ================= OVERRIDES DEL MODO OSCURO PARA BOTONES ================= */
+.panel-layout.dark .btn-print,
+.panel-layout.dark .btn-filter,
+.panel-layout.dark .btn-primary {
+  background-color: #3f3f46;
+}
+
+.panel-layout.dark .btn-print:hover,
+.panel-layout.dark .btn-filter:hover,
+.panel-layout.dark .btn-primary:hover {
+  background-color: #52525b;
+}

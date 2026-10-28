@@ -1,0 +1,298 @@
+/* ================= CONTENEDOR PRINCIPAL ================= */
+.registro-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0; 
+  overflow: hidden; 
+  box-sizing: border-box;
+}
+
+.page-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0;
+  text-transform: uppercase;
+}
+
+/* ================= TARJETAS COMUNES ================= */
+.form-card, .table-card {
+  background-color: var(--bg-card); 
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden; 
+}
+
+.section-title {
+  display: none; /* Oculto para coincidir con tu diseño moderno, actívalo si deseas el título */
+}
+
+/* ================= CUADRÍCULA DEL FORMULARIO ================= */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.grid-span-2 {
+  grid-column: span 2;
+}
+
+.form-group label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.form-group input, 
+.form-group select {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-input);
+  border-radius: 6px;
+  padding: 10px 12px;
+  color: var(--text-main);
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-group select {
+  cursor: pointer;
+  min-height: 42px;
+}
+
+.select-cargo {
+  width: 100%;
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-overflow: ellipsis;
+}
+
+.form-group select option {
+  background-color: var(--bg-card, #18181b);
+  color: var(--text-main, #f4f4f5);
+  padding: 8px 12px;
+  font-size: 0.85rem;
+}
+
+.form-group input::placeholder {
+  color: var(--text-placeholder);
+}
+
+.form-group input:focus, 
+.form-group select:focus {
+  border-color: var(--primary);
+  color: var(--text-main);
+}
+
+/* Input con botón Buscar en línea */
+.input-with-button {
+  display: flex;
+  gap: 8px;
+}
+
+.input-with-button input {
+  flex: 1;
+}
+
+.btn-search-inline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--btn-primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-search-inline:hover {
+  background-color: var(--btn-primary-hover);
+}
+
+.btn-search-inline .panel-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.form-group input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: var(--calendar-filter);
+  cursor: pointer;
+}
+
+/* ================= ZONA DE BÚSQUEDA ================= */
+.search-toolbar-inline {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.search-toolbar-inline label {
+  color: var(--text-secondary);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.search-input-wrapper-dark {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-input);
+  border-radius: 8px;
+  padding: 10px 14px;
+  width: 350px;
+  gap: 8px;
+}
+
+.search-input-wrapper-dark .panel-icon {
+  width: 18px; height: 18px; color: var(--text-muted);
+}
+
+.search-input-wrapper-dark input {
+  background: transparent;
+  border: none;
+  color: var(--text-main);
+  width: 100%;
+  outline: none;
+  font-size: 0.9rem;
+}
+
+.search-input-wrapper-dark input::placeholder {
+  color: var(--text-placeholder);
+}
+
+/* ================= TABLA ESTILOS ================= */
+.table-responsive {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  display: block;
+}
+
+.table-responsive::-webkit-scrollbar { height: 12px; }
+.table-responsive::-webkit-scrollbar-track { background-color: var(--scrollbar-track); border-radius: 8px; }
+.table-responsive::-webkit-scrollbar-thumb { background-color: var(--scrollbar-thumb); border-radius: 8px; border: 2px solid var(--scrollbar-track); }
+
+.custom-data-table {
+  width: 100%;
+  min-width: 1800px; /* Ancho para 17 columnas */
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.custom-data-table th, 
+.custom-data-table td {
+  padding: 14px 16px;
+  white-space: nowrap;
+  font-size: 0.85rem;
+}
+
+.custom-data-table th {
+  color: var(--text-main);
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-input);
+}
+
+.custom-data-table td {
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.text-purple { color: var(--text-purple); }
+.text-muted { color: var(--text-muted); }
+.font-semibold { font-weight: 600; }
+
+.badge-purple {
+  background-color: var(--primary-light);
+  color: var(--text-purple);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.badge-green {
+  background-color: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.badge-red {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+@media (max-width: 1200px) {
+  .form-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ================= PAGINACIÓN ================= */
+.pagination-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+  padding: 10px 0;
+  border-top: 1px solid var(--border-light);
+}
+
+.pagination-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.pagination-btn {
+  padding: 6px 12px;
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-input);
+  color: var(--text-main);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  border-color: var(--primary);
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-btn.active {
+  background-color: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+}
+
+.pagination-info {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}

@@ -1,0 +1,10 @@
+import { Outlet } from 'react-router-dom';
+
+export default function AuthLayout() {
+  return (
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+      {/* El <Outlet /> es el espacio donde se inyectará el componente Login */}
+      <Outlet />
+    </div>
+  );
+}

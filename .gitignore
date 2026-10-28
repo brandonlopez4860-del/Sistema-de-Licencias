@@ -1,0 +1,8 @@
+**/node_modules/
+**/dist/
+**/.env
+**/.env.*
+!.env.example
+backend/database/data_base_ugel.sql
+backend/scratch_*.js
+*.log
